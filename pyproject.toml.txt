@@ -1,0 +1,109 @@
+[build-system]
+requires = ["setuptools>=61.2", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+# including this section enables version inference
+
+[project]
+name = "nxontology"
+maintainers = [{name = "Daniel Himmelstein", email = "dhimmel@related.vc"}]
+license = {text = "Apache"}
+description = "NetworkX for ontologies"
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+keywords = [
+    "networkx",
+    "ontologies",
+    "similarity",
+    "graphs",
+    "networks",
+    "digraph",
+    "information-content",
+    "semantic-similarity",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "fsspec[http]",
+    "networkx>=2",
+    "pronto>=2.4.0",
+]
+dynamic = ["version"]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown; charset=UTF-8"
+
+[project.urls]
+Homepage = "https://github.com/related-sciences/nxontology"
+
+[project.optional-dependencies]
+dev = [
+    "fire",
+    "pandas>=1.5.0",
+    "pre-commit",
+    "pytest",
+]
+viz = ["pygraphviz"]
+
+[tool.setuptools]
+packages = ["nxontology"]
+zip-safe = false
+include-package-data = true
+license-files = ["LICENSE"]
+
+[tool.black]
+target-version = ['py38', 'py39', 'py310', 'py311']
+
+[tool.ruff]
+target-version = "py38"
+line-length = 88
+ignore = [
+    "E402",  # ignore import-at-top-of-file violations
+    "E501",  # ignore line-length violations
+    "F811",  # ignore redefinition of a function
+    "B019",  # ignore functools cache/lru_cache
+    "UP030", # allow explicit positional string formatting
+]
+select = [
+    "B",  # flake8-bugbear
+    "C",  # flake8-comprehensions
+    "C90",  # mccabe
+    "E",  # pycodestyle errors
+    "F",  # pyflakes
+    "I",  # isort
+    "UP",  # pyupgrade
+    "W",  # pycode warnings
+]
+
+# https://mypy.readthedocs.io/en/stable/config_file.html#using-a-pyproject-toml-file
+[tool.mypy]
+python_version = "3.8"
+strict = true
+pretty = true
+show_error_context = true
+
+[[tool.mypy.overrides]]
+module = [
+    "*.tests.*",
+]
+disallow_untyped_defs = false
+disallow_untyped_decorators = false
+
+[[tool.mypy.overrides]]
+module = [
+    "fire.*",
+    "fsspec.*",
+    "networkx.*",
+    "setuptools.*",
+    "pandas.*",
+    "pytest.*",
+    "pygraphviz.*",
+]
+ignore_missing_imports = true
