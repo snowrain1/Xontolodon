@@ -1,15 +1,12 @@
-{
-  "name": "Xontolodon",
-  "version": "1.0.1",
-  "description": "this is test code to try npm",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Channely/plomk.git"
-  },
-  "author": "Xontolodon",
-  "license": "ISC"
+{   "name":             "lwes"
+,   "version":          "0.2.0"
+,   "author":           "Aaron Qian <aq1018@gmail.com> (http://aaronqian.com)"
+,   "contributors":     ["Sal Fuentes Jr. <fuentesjr@gmail.com> (http://about.me/salvador)"]
+,   "repository":       { "type":   "git"
+                        , "url":    "https://github.com/attinteractive/node-lwes.git" }
+,   "devDependencies":  { "vows"    :   "*" }
+,   "directories":      { "lib" : "./lib" }
+,   "main":             "./lib/lwes"
+,   "scripts":          { "postinstall": "cd lib/parser && ./build_lwes && node-waf configure build"
+                        , "test" : "vows test/*.js" }
 }
